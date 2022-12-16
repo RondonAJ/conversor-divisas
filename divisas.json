@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1, 
+        "codigo_iso": "USD",
+        "nombre": "Dolar", 
+        "precio": 890
+    },
+    {
+        "id": 2, 
+        "codigo_iso": "EUR", 
+        "nombre": "Euro", 
+        "precio": 920
+    },
+    {
+        "id": 3, 
+        "codigo_iso": "GBP", 
+        "nombre": "Libra Esterlina", 
+        "precio": 1040
+    }
+]
