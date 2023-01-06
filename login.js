@@ -1,5 +1,6 @@
 let userInput = document.getElementById("user")
 let claveInput = document.getElementById("clave")
+let claveIncorrecta = document.getElementById("clave-incorrecta")
 
 const usuarios = 
 [
@@ -16,13 +17,16 @@ let datosStorage = localStorage.getItem("usuarios")
 let objStorage = JSON.parse(datosStorage)
 
 function go(){
-        if (document.form.password.value =='CLAVE' && document.form.login.value == 'USUARIO'){
-            location.replace = "index.html" 
+
+    for (var indice in objStorage) {
+        if(objStorage[indice].usuario == document.form.login.value && objStorage[indice].contraseña == document.form.password.value)
+        {
+            location.href = 'index.html'
         } 
         else{ 
-            console.log('else')
-            //alert("Porfavor ingrese, nombre de usuario y contraseña correctos.")
-            window.location.href = 'login.html'
+            document.getElementById('clave-mal').value = "Clave incorrecta"
         }
+    }
 }
+
  

@@ -52,3 +52,6 @@ p.principal-text {
     padding: 10px;
     margin-top: 12px;
 }
+input#clave-mal {
+    border: none;
+}

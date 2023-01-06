@@ -2,16 +2,9 @@
 
 const tbody = document.querySelector("tbody")
 const botonesAdd = document.querySelectorAll("button.btn.btn-outline-primary")
-const btnVerCarrito = document.querySelector("button#verCarrito")
 
-//Guardar y Recuperar el Divisa con LocalStorage + JSON
-const divisaPapelera = []
-const guardarDivisa = ()=> (divisaPapelera.length > 0) && localStorage.setItem("DivisaStorage", JSON.stringify(divisaPapelera))
-const recuperarDivisa = ()=> JSON.parse(localStorage.getItem("DivisaStorage")) || []
-divisaPapelera.push(...recuperarDivisa())
 const divisas = []
 
-//const URL = 'https://api.exchangerate-api.com/v4/latest/usd'
 const URL = 'divisas.json'
 
 fetch(URL)
@@ -39,23 +32,23 @@ const armarTablaHTML = (divisas) => {
             </tr>`
 }
 
-//Cargar los productos en la tabla HTML
+//Cargar las divisas en la tabla HTML
 
 const cargarDivisas = (array)=> {
     let tablaHTML = ""
         if (array.length > 0) {
             array.forEach((divisas) => tablaHTML += armarTablaHTML(divisas))
         } else {
-            tablaHTML = "<h2 class='error-prendas'>Error al cargar productos.</h2>"
+            tablaHTML = "<h2>Error al cargar productos.</h2>"
         }
         tbody.innerHTML = tablaHTML
 }
 //Activar el evento CLICK por cada botón dinámico generado
 const activarClickBotonesAdd = ()=> {
+    const botonesAdd = document.querySelectorAll("button.btn.btn-outline-primary")
           botonesAdd.forEach(btn => {
             btn.addEventListener("click", (e)=> {
                 let resultado = buscarDivisa(e.target.id)
-                console.log(resultado)
                 precioDivisa = resultado.precio
                 inputLlenado = 'ingresar-'+e.target.id
                 inputTotal = 'total-'+e.target.id
@@ -73,18 +66,6 @@ function buscarDivisa(id) {
 function calcularMonto() {
 
     conversion = montoIngresado/precioDivisa;
-    inputTotal.style.background = '#415EDE'
+    document.getElementById(inputTotal).style.background = '#415EDE'
     document.getElementById(inputTotal).value = "$"+conversion.toFixed(2)
-    divisaPapelera.push(conversion.toFixed(2))
-    guardarDivisa()
 }
-
-function verCarrito() {
-    if (divisaPapelera.length > 0) {
-        alert(`El costo total es de $ ${divisaPapelera.precio}`)
-    } else {
-        alert("El carrito está vacío!")
-    }
-}
-
-btnVerCarrito.addEventListener("click", verCarrito)
